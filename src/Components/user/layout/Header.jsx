@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import SignupPage from "../../SignupPage";
 function Header() {
     const [show, setShow] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
+    useEffect(() => {
+        if (location.pathname.includes('reset')) {
+            setShow(true);
+        }
+    }, [location])
     return (
         <div className='header'>
             <nav className="navbar navbar-expand-lg px-4">

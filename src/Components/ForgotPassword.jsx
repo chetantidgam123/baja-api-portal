@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { post_data } from "../ApiServices";
 import { convertToPayload } from "../Utils";
 import { FormikProvider, useFormik } from "formik";
@@ -7,13 +7,16 @@ import { forgotPassSchema } from "../Schema";
 import { Form } from "react-bootstrap";
 import FloatingInputLabel from "./user/UtilComponent/FloatingInputLabel";
 import PropTypes from 'prop-types';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ResetPasswrd from "./ResetPasswrd";
 function ForgotPassword({ setShowForgotPass, setShowLogin }) {
-    const [showResetPassword, setShowResetPassword] = useState(false)
+    const [showResetPassword, setShowResetPassword] = useState(false);
+    const location = useLocation();
     const forgotPasswordForm = useFormik({
         initialValues: {
             emailId: "",
+            "emailId12-forgetpass": "",
+            "emailId-forgetpass": ""
         },
         validationSchema: forgotPassSchema,
         onSubmit: () => {
@@ -40,12 +43,18 @@ function ForgotPassword({ setShowForgotPass, setShowLogin }) {
             })
     };
 
+    useEffect(() => {
+        if (location.pathname.includes('reset')) {
+            console.log('reset call')
+            setShowResetPassword(true);
+        }
+    }, [])
     return (
         <div className="">
             {!showResetPassword && <FormikProvider value={forgotPasswordForm}>
                 <Form className="my-4">
                     <div className="" style={{ opacity: '0' }}>
-                        <FloatingInputLabel fieldName={`emailId12`} formikFrom={forgotPasswordForm} labelText={`Email Address`} />
+                        <FloatingInputLabel fieldName={`emailId12-forgetpass`} formikFrom={forgotPasswordForm} labelText={`Email Address`} />
                     </div>
                     <h3>Sign In</h3>
                     <p className="text-muted">Sign In your account</p>
@@ -63,12 +72,12 @@ function ForgotPassword({ setShowForgotPass, setShowLogin }) {
                         </div>
                     </div>
                     <div className="mb-1" style={{ opacity: '0' }}>
-                        <FloatingInputLabel fieldName={`emailId1234`} formikFrom={forgotPasswordForm} labelText={`Email Address`} />
+                        <FloatingInputLabel fieldName={`emailId-forgetpass`} formikFrom={forgotPasswordForm} labelText={`Email Address`} />
                     </div>
                 </Form>
             </FormikProvider>}
             {
-                showResetPassword && <ResetPasswrd setShowLogin={setShowLogin} />
+                showResetPassword && <ResetPasswrd setShowForgotPass={setShowForgotPass} />
             }
         </div>
     );

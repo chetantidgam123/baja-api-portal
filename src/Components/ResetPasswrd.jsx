@@ -7,7 +7,7 @@ import { Form } from "react-bootstrap";
 import FloatingInputLabel from "./user/UtilComponent/FloatingInputLabel";
 import PropTypes from 'prop-types';
 import { error_swal_toast, success_swal_toast } from "../SwalServices";
-function ResetPassword({ setShowLogin }) {
+function ResetPassword({ setShowForgotPass }) {
 
     const resetPassForm = useFormik({
         initialValues: {
@@ -22,7 +22,7 @@ function ResetPassword({ setShowLogin }) {
     })
 
     const handleSubmit = () => {
-        setShowLogin(true);
+        setShowForgotPass(false);
         return
         let payload = {
             password: resetPassForm.values.password,
@@ -70,6 +70,6 @@ function ResetPassword({ setShowLogin }) {
     );
 }
 ResetPassword.propTypes = {
-    setShowLogin: PropTypes.func,
+    setShowForgotPass: PropTypes.func,
 }
 export default ResetPassword;

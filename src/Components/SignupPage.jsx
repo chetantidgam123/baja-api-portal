@@ -6,11 +6,12 @@ import { signupFormSchema } from "../Schema";
 import { Form } from "react-bootstrap";
 import PropTypes from 'prop-types';
 import FloatingInputLabel from "./user/UtilComponent/FloatingInputLabel";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Login from "./Login";
 import { error_swal_toast, success_swal_toast } from "../SwalServices";
+import { useEffect } from "react";
 function SignupPage({ show, setShow, showLogin, setShowLogin }) {
-
+  const location = useLocation();
   const signupForm = useFormik({
     initialValues: {
       fullName: "",
@@ -49,6 +50,11 @@ function SignupPage({ show, setShow, showLogin, setShowLogin }) {
       })
   };
 
+  useEffect(() => {
+    if (location.pathname.includes('reset')) {
+      setShowLogin(true);
+    }
+  }, [location])
 
   return (
     <div className="col-12 px-3">

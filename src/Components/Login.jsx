@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { post_data } from "../ApiServices";
 import { convertToPayload, setTokenData } from "../Utils";
 import { FormikProvider, useFormik } from "formik";
@@ -8,11 +8,11 @@ import { Form } from "react-bootstrap";
 import FloatingInputLabel from "./user/UtilComponent/FloatingInputLabel";
 import PropTypes from 'prop-types';
 import ForgotPassword from "./ForgotPassword";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { error_swal_toast, success_swal_toast } from "../SwalServices";
 function Login({ setShowLogin, setShow }) {
     const [showForgotPass, setShowForgotPass] = useState(false)
-
+    const location = useLocation();
     const Loginform = useFormik({
         initialValues: {
             emailId: "",
@@ -44,6 +44,12 @@ function Login({ setShowLogin, setShow }) {
                 console.error("Error during signup:", error);
             })
     };
+
+    useEffect(() => {
+        if (location.pathname.includes('reset')) {
+            setShowForgotPass(true);
+        }
+    }, [location])
 
     return (
         <div className="">

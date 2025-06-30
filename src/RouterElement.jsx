@@ -29,6 +29,7 @@ const routes = [
         children: [
             { index: true, element: <HomePageContent /> },
             { path: "/", element: <HomePageContent /> },
+            { path: "/reset", element: <HomePageContent /> },
             { path: "/page", element: <PrivateRoute><PageNotFound /></PrivateRoute> },
             { path: "/register", element: <SignupPage /> },
             { path: "/login", element: <LoginPage /> },
