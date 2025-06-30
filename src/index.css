@@ -1,0 +1,100 @@
+body {
+    --bs-body-font-family: var(--bs-font-sans-serif);
+    --bs-font-sans-serif: "Roboto", sans-serif;
+}
+
+.heading {
+    background: -webkit-linear-gradient(#3f51b5, #955ef4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    --bs-font-sans-serif: "Roboto", sans-serif;
+}
+
+.font-400 {
+    font-weight: 400;
+}
+
+.sideBar {
+    width: 20em !important;
+}
+
+/* userCss start */
+.home-layout {
+    height: 100vh;
+    background-color: rgb(233 231 231 / 33%);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.sidebar {
+    width: 18em !important;
+    border-radius: 1em;
+}
+
+.header {
+    height: 12vh;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+.header .container-fluid,
+.authBtn>.btn {
+    border-radius: 2.5rem;
+    box-shadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
+}
+
+.footer {
+    height: 12vh;
+    background-color: #000;
+}
+
+.outlet {
+    height: 88vh;
+    gap: 1em;
+    display: flex;
+}
+
+.center-content,
+.right-content {
+    background-color: white;
+    border-radius: 1em;
+    padding: 0.5em !important;
+}
+
+.logo-img {
+    width: 40px;
+    height: 50px;
+    margin: 5px 10px !important;
+    filter: brightness(3);
+}
+
+/* Login page styles */
+.login-container {
+    background: linear-gradient(to bottom right, #cae8ff, #ffffff);
+}
+
+.form-floating>.form-control:not(:placeholder-shown)~label {
+    transform: scale(.85) translateY(-1.5rem) translateX(.15rem) !important;
+}
+
+.form-floating>.form-control:focus~label {
+    transform: scale(.85) translateY(-1.5rem) translateX(.15rem) !important;
+}
+
+.signUpsideBanner {
+    background-image: url('/assets/img/signUpsidebg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+}
+
+.modal-header button {
+    margin-top: 1px !important;
+    font-size: 12px !important;
+    color: black !important;
+}
+
+/* userCss end */
