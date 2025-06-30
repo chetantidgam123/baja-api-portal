@@ -56,8 +56,8 @@ function ForgotPassword({ setShowForgotPass, setShowLogin }) {
                     <div className="" style={{ opacity: '0' }}>
                         <FloatingInputLabel fieldName={`emailId12-forgetpass`} formikFrom={forgotPasswordForm} labelText={`Email Address`} />
                     </div>
-                    <h3>Sign In</h3>
-                    <p className="text-muted">Sign In your account</p>
+                    <h3>Forgot Password</h3>
+                    <p className="text-muted">Dont't worry we'll help you to reset your password</p>
                     <div className="">
                         <FloatingInputLabel fieldName={`emailId`} formikFrom={forgotPasswordForm} labelText={`Email Address`} />
                     </div>
