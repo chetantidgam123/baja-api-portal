@@ -7,8 +7,11 @@ import { Form } from "react-bootstrap";
 import FloatingInputLabel from "./user/UtilComponent/FloatingInputLabel";
 import PropTypes from 'prop-types';
 import { error_swal_toast, success_swal_toast } from "../SwalServices";
-function ResetPassword({ setShowForgotPass }) {
-
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+function ResetPassword({ setModalName, setShowLogin }) {
+    const navigate = useNavigate();
+    const [showSuccess, setShowSuccess] = useState(false);
     const resetPassForm = useFormik({
         initialValues: {
             password: "",
@@ -22,13 +25,13 @@ function ResetPassword({ setShowForgotPass }) {
     })
 
     const handleSubmit = () => {
-        setShowForgotPass(false);
+        setShowSuccess(true);
         return
         let payload = {
             password: resetPassForm.values.password,
             confirmPassword: resetPassForm.values.confirmPassword,
         }
-        post_data("public", convertToPayload('login', payload), {})
+        post_data("portal/public", convertToPayload('login', payload), {})
             .then((response) => {
                 if (response.status) {
                     setTokenData(response.data.result);
@@ -45,7 +48,7 @@ function ResetPassword({ setShowForgotPass }) {
 
     return (
         <div className="">
-            <FormikProvider value={resetPassForm}>
+            {!showSuccess && <FormikProvider value={resetPassForm}>
                 <Form className="">
                     <div className="" style={{ opacity: '0', height: '82px' }}>
                         <FloatingInputLabel fieldName={`emailId12`} formikFrom={resetPassForm} labelText={`Email Address`} />
@@ -65,11 +68,29 @@ function ResetPassword({ setShowForgotPass }) {
                         <FloatingInputLabel fieldName={`emailId1234`} formikFrom={resetPassForm} labelText={`Email Address`} />
                     </div>
                 </Form>
-            </FormikProvider>
+            </FormikProvider>}
+            {showSuccess &&
+                <div className="d-flex align-item-center loginModalHeight">
+                    <div className="successtext bg-white">
+                        <img src="/assets/img/mail.png" alt="NA" className="my-3" />
+                        <h2>
+                            Sucess!
+                        </h2>
+                        <small className="text-muted">
+                            Your password has been successfully updated!
+                        </small>
+                        <div className="text-center mt-3">
+                            <button type="button" className="btn btn-primary w-100" onClick={() => { setModalName('login'); navigate('/') }}>Sign In <i className="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
+
     );
 }
 ResetPassword.propTypes = {
-    setShowForgotPass: PropTypes.func,
+    setModalName: PropTypes.func,
+    setShowLogin: PropTypes.func,
 }
 export default ResetPassword;

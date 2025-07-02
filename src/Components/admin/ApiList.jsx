@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 function ApiList() {
     const navigate = useNavigate();
     const getApiList = () => {
-        post_data("private", convertToPayload('get-api-list', {}), {})
+        post_data("portal/private", convertToPayload('get-api-list', {}), {})
             .then((response) => {
                 if (response.status) {
                     alert("Signup successful! Please log in.");

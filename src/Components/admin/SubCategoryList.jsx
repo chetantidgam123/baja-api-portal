@@ -24,7 +24,7 @@ function SubCategoryList() {
     })
 
     const getSubCategoryList = () => {
-        post_data("private", convertToPayload('get-sub-category-list', {}), {})
+        post_data("portal/private", convertToPayload('get-sub-category-list', {}), {})
             .then((response) => {
                 if (response.status) {
                     alert("Signup successful! Please log in.");
@@ -41,7 +41,7 @@ function SubCategoryList() {
             subcategoryName: subcategoryForm.values.subcategoryName,
             categoryId: subcategoryForm.values.categoryId,
         }
-        post_data("private", convertToPayload('add-sub-category', payload), {})
+        post_data("portal/private", convertToPayload('add-sub-category', payload), {})
             .then((response) => {
                 if (response.status) {
                     alert("Signup successful! Please log in.");

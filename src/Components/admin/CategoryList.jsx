@@ -23,7 +23,7 @@ function CategoryList() {
     })
 
     const getCategoryList = () => {
-        post_data("private", convertToPayload('get-all-categories', {}), {})
+        post_data("portal/private", convertToPayload('get-all-categories', {}), {})
             .then((response) => {
                 if (response.status) {
                     alert("Signup successful! Please log in.");
@@ -39,7 +39,7 @@ function CategoryList() {
         let payload = {
             categoryName: categoryForm.values.categoryName,
         }
-        post_data("private", convertToPayload('add-category', payload), {})
+        post_data("portal/private", convertToPayload('add-category', payload), {})
             .then((response) => {
                 if (response.status) {
                     alert("Signup successful! Please log in.");

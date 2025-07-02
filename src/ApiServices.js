@@ -50,8 +50,27 @@ const post_data = (endpoint, data, _headers) => {
   }
   return apiService.post(endpoint, data, { headers: hdrs });
 };
+const post_data_email = (endpoint, data, _headers) => {
+  let hdrs = {
+    'Content-Type': 'application/json',
+    'client_id': import.meta.env.VITE_CLIENT_ID,
+    'client_secret': import.meta.env.VITE_CLIENT_SECRET
+  };
+  if (_headers) {
+    try {
+      Object.entries(_headers).forEach(([key, value]) => {
+        hdrs[key] = value;
+      });
+    } catch (_) {
+      console.log(_)
+      return
+    }
+  }
+  return apiService.post(endpoint, JSON.parse(data), { headers: hdrs });
+};
 
 
 export {
   post_data,
+  post_data_email
 };

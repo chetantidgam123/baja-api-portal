@@ -27,7 +27,7 @@ function UserList() {
     })
 
     const getUserList = () => {
-        post_data("private", convertToPayload('get-user-list', {}), {})
+        post_data("portal/private", convertToPayload('get-user-list', {}), {})
             .then((response) => {
                 if (response.status) {
                     alert("Signup successful! Please log in.");
@@ -46,7 +46,7 @@ function UserList() {
             emailId: UserForm.values.emailId,
             userPassword: UserForm.values.userPassword,
         }
-        post_data("private", convertToPayload('add-category', payload), {})
+        post_data("portal/private", convertToPayload('add-category', payload), {})
             .then((response) => {
                 if (response.status) {
                     alert("Signup successful! Please log in.");
