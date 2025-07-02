@@ -1,15 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal, Table } from 'react-bootstrap';
-import { Link, useOutletContext } from 'react-router-dom';
+import { Link, useOutletContext, useParams } from 'react-router-dom';
 import LangCurlExecuteComp from './LangCurlExecuteComp';
 import SyntaxHighLighter from './SyntaxHighLighter';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
+import { sidebardata } from '../../Utils';
 function HomePageContent() {
     const { pageData } = useOutletContext();
+    const { collection_id, category_id, api_id } = useParams();
     const [show, setShow] = useState(false)
-    const codeString = '{}'
+    const [apiData, setApiData] = useState(null)
 
+    useEffect(() => {
+        if (api_id) {
+            let collection = sidebardata.filter((item, index) => item.collection_id == collection_id);
+            let category = collection[0].category.filter((item, index) => item.category_id == category_id);
+            let apidetails = category[0].subcategory.filter((ca, index) => ca.api_id = api_id);
+            setApiData(apidetails.length > 0 ? apidetails[0] : null)
+        }
+    }, [api_id])
     return (
         <div className="home-container">
             <div className="home-content">
@@ -20,15 +30,15 @@ function HomePageContent() {
                             <ReactMarkdown remarkPlugins={[remarkGfm]}>{pageData.description || "Update in Progress"}</ReactMarkdown>
                         </div>
                     </div>
-                    <div className="card  my-3">
+                    {apiData && <div className="card  my-3">
                         <div className="card-body">
                             <div className="d-flex justify-content-between align-items-center mb-3">
                                 <h5 className="">Request Sample :</h5>
                                 <Link><img src="/assets/img/copy.png" alt="copy" /></Link>
                             </div>
-                            <SyntaxHighLighter jsonString={codeString} />
+                            <SyntaxHighLighter jsonString={JSON.stringify(apiData.body || {}, null, 2)} />
                         </div>
-                    </div>
+                    </div>}
                     <div className="card ">
                         <div className="card-body">
                             <div className="d-flex justify-content-between mb-3">
@@ -84,15 +94,15 @@ function HomePageContent() {
                             </div>
                         </div>
                     </div>
-                    <div className="card  my-3">
+                    {apiData && <div className="card  my-3">
                         <div className="card-body">
                             <div className="d-flex justify-content-between align-items-center mb-3">
                                 <h5 className="">Response Sample :</h5>
                                 <Link><img src="/assets/img/copy.png" alt="copy" /></Link>
                             </div>
-                            <SyntaxHighLighter jsonString={codeString} />
+                            <SyntaxHighLighter jsonString={JSON.stringify(apiData.response[0].response || {}, null, 2)} />
                         </div>
-                    </div>
+                    </div>}
                     <div className="card ">
                         <div className="card-body">
                             <div className="d-flex justify-content-between mb-3">
@@ -152,7 +162,7 @@ function HomePageContent() {
 
                 </div>
                 <div className="right-content">
-                    <LangCurlExecuteComp />
+                    {apiData && <LangCurlExecuteComp apiData={apiData} />}
                 </div>
             </div>
             <Modal size="xl" show={show} onHide={() => setShow(false)} centered>

@@ -1,6 +1,5 @@
 
 import { Link } from "react-router-dom";
-import { post_data_email } from "../ApiServices";
 import { FormikProvider, useFormik } from "formik";
 import { forgotPassSchema } from "../Schema";
 import { Form } from "react-bootstrap";

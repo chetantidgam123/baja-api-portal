@@ -1,11 +1,13 @@
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { xt256 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import PropTypes from 'prop-types';
 function SyntaxHighLighter({ jsonString }) {
     return (
-        <SyntaxHighlighter language="javascript" style={xt256}>
-            {jsonString}
-        </SyntaxHighlighter>
+        <div className='hightlighter'>
+            <SyntaxHighlighter language={"javascript"} style={coy} showLineNumbers>
+                {jsonString}
+            </SyntaxHighlighter>
+        </div>
     )
 }
 SyntaxHighLighter.propTypes = {

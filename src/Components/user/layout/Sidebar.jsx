@@ -1,6 +1,7 @@
 import { Accordion, Badge } from "react-bootstrap"
 import { arrayIndex, sidebardata } from "../../../Utils"
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 function Sidebar({ setPageData }) {
     return (
         <div className="sidebar bg-white">
@@ -20,7 +21,9 @@ function Sidebar({ setPageData }) {
                                                     {
                                                         cItem.subcategory.map((sItem, si) => (
                                                             <div key={arrayIndex('acc_Si', si)}>
-                                                                <Badge pill bg="" className={`mx-2 badge-${sItem.method.toLowerCase()}`}> {sItem.method}</Badge>{`${sItem.api_name}`}
+                                                                <Link style={{ textDecoration: 'none' }} to={`/api/${item.collection_id}/${cItem.category_id}/${sItem.api_id}`} >
+                                                                    <Badge pill bg="" className={`mx-2 badge-${sItem.method.toLowerCase()}`}> {sItem.method}</Badge>{`${sItem.api_name}`}
+                                                                </Link>
                                                             </div>
                                                         ))
                                                     }
@@ -42,4 +45,6 @@ function Sidebar({ setPageData }) {
 Sidebar.propTypes = {
     setPageData: PropTypes.func
 }
+
+
 export default Sidebar
